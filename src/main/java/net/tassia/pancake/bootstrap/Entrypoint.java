@@ -21,6 +21,26 @@ public final class Entrypoint {
 	 * @param args command-line arguments
 	 */
 	public static void main(String[] args) {
+		try {
+			bootstrap(args);
+		} catch (Throwable ex) {
+			System.err.println("Something went severely wrong while executing the application.");
+			ex.printStackTrace(System.err);
+		}
+	}
+
+
+
+
+
+	/**
+	 * The contents of the main bootstrap function.
+	 *
+	 * <b>Note:</b> Not wrapped in an extra try-catch block.
+	 *
+	 * @param args command-line arguments
+	 */
+	public static void bootstrap(String[] args) {
 		// Create loggers
 		Logging.init(args);
 

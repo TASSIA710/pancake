@@ -4,6 +4,7 @@ import net.tassia.event.EventManager;
 import net.tassia.event.impl.EventManagerImpl;
 import net.tassia.pancake.config.BootConfiguration;
 import net.tassia.pancake.database.DatabaseManager;
+import net.tassia.pancake.http.HttpServer;
 import net.tassia.pancake.logging.Logging;
 
 import java.util.logging.Logger;
@@ -45,6 +46,11 @@ public final class Pancake {
 	 * The internal core logger.
 	 */
 	private final Logger logger;
+
+	/**
+	 * The HTTP server.
+	 */
+	private HttpServer httpServer;
 
 
 
@@ -99,7 +105,7 @@ public final class Pancake {
 
 		if (bootConfig.getHttpEnabled()) {
 			logger.fine("Loading HTTP server...");
-			// TODO
+			httpServer = new HttpServer(bootConfig);
 		}
 
 		if (bootConfig.getSmtpEnabled()) {
@@ -139,7 +145,7 @@ public final class Pancake {
 
 		if (bootConfig.getHttpEnabled()) {
 			logger.fine("Starting HTTP server...");
-			// TODO
+			httpServer.start();
 		}
 
 		if (bootConfig.getSmtpEnabled()) {
@@ -168,7 +174,7 @@ public final class Pancake {
 
 		if (bootConfig.getHttpEnabled()) {
 			logger.fine("Terminating HTTP server...");
-			// TODO
+			httpServer.stop();
 		}
 
 		if (bootConfig.getSmtpEnabled()) {
